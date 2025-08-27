@@ -3,6 +3,7 @@ UOWD SCHEDULAR
 
 This Python script automates enrolling in your university’s SOLS tutorial, lab and lecture timeslots. It reads your desired subjects, timeslot identifiers and direct enrollment URLs from an Excel file, then drives a real browser session (via Playwright) to select and confirm each slot in priority order.
 
+
 Contents
 --------
 • timetable_bot.py  
