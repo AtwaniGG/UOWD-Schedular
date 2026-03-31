@@ -8,7 +8,10 @@ cookies = []
 with open(input_file, "r") as f:
     for line in f:
         if not line.startswith("#") and line.strip():
-            domain, _, path, secure, expiry, name, value = line.strip().split("\t")
+            parts = line.strip().split("\t")
+            if len(parts) < 7:
+                continue
+            domain, _, path, secure, expiry, name, value = parts[:7]
             cookies.append({
                 "name": name,
                 "value": value,

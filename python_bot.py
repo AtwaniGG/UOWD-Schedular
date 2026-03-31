@@ -41,7 +41,7 @@ def enroll_in_block(page, course, ctype, target_string):
         text = block.inner_text().strip()
         if normalize(target_string) in normalize(text):
             try:
-                print(f"👉 Clicking timeslot block: {text}")
+                print(f" Clicking timeslot block: {text}")
                 link = block.query_selector("a")
                 if link:
                     page.evaluate("(el) => el.click()", link)
@@ -100,7 +100,7 @@ def main():
                 if enroll_in_block(page, subject, ctype, target_string):
                     # Step 2: Wait for and click the "ENROL NOW" button
                     try:
-                        print("➡️ Waiting for 'ENROL NOW' button...")
+                        print(" Waiting for 'ENROL NOW' button...")
                         # Wait up to 15 seconds for the button
                         page.wait_for_selector("input[type='submit'][value='Enrol Now']", timeout=15000)
                         page.click("input[type='submit'][value='Enrol Now']")
