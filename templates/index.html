@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UOWD Schedular</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <h1>UOWD Schedular</h1>
+    <div class="status" id="status">
+      <span class="dot" id="dot"></span>
+      <span id="statusText">checking…</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="cardhead">
+        <h2>Timings</h2>
+        <div class="actions">
+          <button id="addRow" type="button">+ Add row</button>
+          <button id="saveTimings" type="button" class="primary">Save timings</button>
+        </div>
+      </div>
+      <div class="tablewrap">
+        <table id="timingsTable">
+          <thead>
+            <tr>
+              <th>Subject</th>
+              <th>Type</th>
+              <th>String</th>
+              <th>URL link</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="hint">Type matches what SOLS shows (e.g. <code>COMPUTER LAB</code>, <code>TUTORIAL</code>, <code>LECTURE</code>). String is the exact timeslot text from the SOLS page.</p>
+    </section>
+
+    <section class="card">
+      <div class="cardhead">
+        <h2>Bot control</h2>
+      </div>
+      <div class="row">
+        <button id="startBtn" type="button" class="primary">Start bot</button>
+        <button id="stopBtn" type="button" class="danger">Stop</button>
+      </div>
+      <div class="row">
+        <label><input type="checkbox" id="headless"> Headless (no visible browser)</label>
+      </div>
+      <div class="row">
+        <label>Slow-mo (ms): <input type="number" id="slowMo" min="0" step="50" style="width:6em"></label>
+        <button id="saveConfig" type="button">Save config</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="cardhead">
+        <h2>Priority order</h2>
+        <div class="actions">
+          <button id="addPriority" type="button">+ Add</button>
+          <button id="savePriority" type="button" class="primary">Save priority</button>
+        </div>
+      </div>
+      <ul id="priorityList" class="priority"></ul>
+      <p class="hint">Drag the ⇅ handle to reorder. Items at the top run first.</p>
+    </section>
+
+    <section class="card">
+      <div class="cardhead">
+        <h2>Cookies</h2>
+      </div>
+      <div class="row">
+        <input type="file" id="cookieFile" accept=".txt">
+        <button id="uploadCookies" type="button" class="primary">Upload &amp; convert</button>
+      </div>
+      <p class="hint" id="cookieStatus">checking…</p>
+    </section>
+
+    <section class="card logcard">
+      <div class="cardhead">
+        <h2>Logs</h2>
+        <div class="actions">
+          <button id="clearLogs" type="button">Clear</button>
+        </div>
+      </div>
+      <pre id="logs" class="logs"></pre>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

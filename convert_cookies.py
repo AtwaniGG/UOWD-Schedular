@@ -1,13 +1,12 @@
-from http.cookies import SimpleCookie
 import json
 
-input_file = "cookies.txt"       # your exported file
-output_file = "chrome_cookies.json"
 
-cookies = []
-with open(input_file, "r") as f:
-    for line in f:
-        if not line.startswith("#") and line.strip():
+def convert(input_path: str = "cookies.txt", output_path: str = "chrome_cookies.json") -> int:
+    cookies = []
+    with open(input_path, "r") as f:
+        for line in f:
+            if line.startswith("#") or not line.strip():
+                continue
             parts = line.strip().split("\t")
             if len(parts) < 7:
                 continue
@@ -20,10 +19,15 @@ with open(input_file, "r") as f:
                 "expires": int(expiry) if expiry != "0" else -1,
                 "httpOnly": False,
                 "secure": secure.lower() == "true",
-                "sameSite": "Lax"
+                "sameSite": "Lax",
             })
 
-with open(output_file, "w") as f:
-    json.dump(cookies, f, indent=2)
+    with open(output_path, "w") as f:
+        json.dump(cookies, f, indent=2)
 
-print(f"Cookies converted and saved to {output_file}")
+    return len(cookies)
+
+
+if __name__ == "__main__":
+    n = convert()
+    print(f"Cookies converted and saved to chrome_cookies.json ({n} entries)")
